@@ -8,10 +8,10 @@ GalleryLink - A platform for artists to upload artwork and for gallery owners/cu
 https://github.com/anthonymang/gallery-link
 
 `3` Wireframe for your app - (Lucidchart)
-
+![ERD](./GalleryLink_ERD.png)
 
 `4` An ERD with two models (minimum) > User + 1 Resource (one to many) - (Lucidchart)
-https://lucid.app/lucidchart/invitations/accept/inv_1768bc05-0600-4d06-9aca-3f01b904557d?viewport_loc=120%2C264%2C1819%2C831%2C0_0
+
 
 
 `5` Create (3-5) User Stories for the base user experience - ( [Reference](https://revelry.co/resources/development/user-stories-that-dont-suck/) )
