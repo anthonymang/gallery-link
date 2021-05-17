@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.user.hasMany(models.work)
     }
   };
   user.init({
@@ -43,11 +44,27 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Password must be between 8 and 99 characters'
         }
       }
+    },
+    phone_number: {
+      type: DataTypes.STRING,
+    },
+    city: {
+      type: DataTypes.STRING
+    },
+    state: {
+      type: DataTypes.STRING
+    },
+    bio: {
+      type: DataTypes.TEXT
+    },
+    profilePic: {
+      type: DataTypes.STRING
     }
   }, {
     sequelize,
     modelName: 'user',
-  });
+  })
+  ;
 
 user.addHook('beforeCreate', (pendingUser)=>{
   let hash = bcrypt.hashSync(pendingUser.password, 12);
