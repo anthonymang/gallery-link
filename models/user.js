@@ -15,19 +15,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.user.hasOne(models.artist)
+      models.user.hasOne(models.gallery)
       models.user.hasMany(models.work)
     }
   };
   user.init({
-    name: {
-      type: DataTypes.STRING,
-      validate: {
-        len: {
-          args: [1,99],
-          msg: 'Name must be between 1 and 99 characters'
-        }
-      }
-    },
     email: {
       type: DataTypes.STRING,
       validate: {
@@ -45,19 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    phone_number: {
-      type: DataTypes.STRING,
-    },
-    city: {
-      type: DataTypes.STRING
-    },
-    state: {
-      type: DataTypes.STRING
-    },
-    bio: {
-      type: DataTypes.TEXT
-    },
-    profilePic: {
+    usertype: {
       type: DataTypes.STRING
     }
   }, {

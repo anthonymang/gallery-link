@@ -28,19 +28,40 @@ router.post('/login', passport.authenticate('local', {
 }))
 
 router.post('/signup', async (req,res)=>{
-  const { email, name, password } = req.body;
-
+  const { email, password, usertype } = req.body;
   try {
     const [user, created] = await db.user.findOrCreate({
       where: { email },
-      defaults: { name, password }
+      defaults: { password, usertype }
     });
     if (created) {
-        console.log(`----- ${user.name} was created -----`);
-        const successObject = {
-          successRedirect: '/',
-          successFlash: `Welcome ${user.name}. Account was created and logging in...`
+        console.log(user)
+        console.log(`----- ${user.email} was created -----`);
+        let successObject = {};
+        console.log(user.usertype)
+        if (user.usertype == 'artist'){
+
+          const newArtist = await db.artist.create({
+            userId: user.id,
+            email: email
+          })
+
+         successObject = {
+          successRedirect: '/artists/setup',
+          successFlash: `Welcome. Account was created for ${user.email}. Logging in...`
+         }
+        } else {
+
+          const newGallery = await db.gallery.create({
+            userId: user.id,
+            email: email
+          })
+          
+          successObject = {
+            successRedirect: '/galleries/setup',
+            successFlash: `Welcome. Account was created for ${user.email}. Logging in...`
         }
+      }
         passport.authenticate('local', successObject)(req,res);
 
     } else {

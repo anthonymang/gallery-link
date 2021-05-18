@@ -1,34 +1,41 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('works', {
+    await queryInterface.createTable('artists', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
+      first_name: {
         type: Sequelize.STRING
       },
-      yearCreated: {
+      last_name: {
+        type: Sequelize.STRING
+      },
+      profileImage: {
+        type: Sequelize.STRING
+      },
+      email: {
+        type: Sequelize.STRING
+      },
+      city: {
+        type: Sequelize.STRING
+      },
+      state: {
+        type: Sequelize.STRING
+      },
+      age: {
         type: Sequelize.INTEGER
       },
-      description: {
+      bio: {
         type: Sequelize.TEXT
       },
-      imageFile: {
-        type: Sequelize.STRING
-      },
-      discipline: {
-        type: Sequelize.STRING
-      },
-      artistId:{
+      userId: {
         type: Sequelize.INTEGER
       },
-      userId:{
-        type: Sequelize.INTEGER
-      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -40,6 +47,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('works');
+    await queryInterface.dropTable('artists');
   }
 };
