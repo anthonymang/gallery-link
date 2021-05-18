@@ -50,8 +50,7 @@ router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) 
         // let result = await streamUpload(req);
         // console.log(result);
         const thisGallery = await db.gallery.findOne({
-            where: {userId: req.user.id},
-            include: [db.user]
+            where: {userId: req.user.id}
         })
         const updatedGallery = await thisGallery.update({
             // profileImage: result.url,
@@ -65,8 +64,16 @@ router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) 
             description: req.body.description,
             setupComplete: req.body.setupComplete
         })
+
+        const thisUser = await db.user.findOne({
+            where: {id: req.user.id}
+        })
+
+        const updatedUser = await thisUser.update({
+            setupComplete: req.body.setupComplete
+        })
         console.log(updatedGallery)
-        console.log(req.user)
+        console.log(updatedUser)
         res.redirect(`/`)
         } catch (err){
         console.log(err)

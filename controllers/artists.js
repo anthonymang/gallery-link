@@ -75,9 +75,10 @@ router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) 
         // let result = await streamUpload(req);
         // console.log(result);
         const thisArtist = await db.artist.findOne({
-            where: {userId: req.user.id},
-            include: [db.user]
+            where: {userId: req.user.id}
+            // include: [db.user]
         })
+        
         const updatedArtist = await thisArtist.update({
             // profileImage: result.url,
             first_name: req.body.first_name,
@@ -86,9 +87,17 @@ router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) 
             state: req.body.state,
             age: req.body.age,
             bio: req.body.bio,
+        })
+
+        const thisUser = await db.user.findOne({
+            where: {id: req.user.id}
+        })
+
+        const updatedUser = await thisUser.update({
             setupComplete: req.body.setupComplete
         })
         console.log(updatedArtist)
+        console.log(updatedUser)
         console.log(req.user)
         res.redirect(`/`)
         } catch (err){
