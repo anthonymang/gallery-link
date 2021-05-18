@@ -40,6 +40,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     usertype: {
       type: DataTypes.STRING
+    },
+
+    setupComplete: {
+      type: DataTypes.STRING
     }
   }, {
     sequelize,

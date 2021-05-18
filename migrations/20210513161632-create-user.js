@@ -17,6 +17,9 @@ module.exports = {
       usertype: {
         type: Sequelize.STRING
       },
+      setupComplete: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

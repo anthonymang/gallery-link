@@ -12,44 +12,19 @@ const streamifier = require('streamifier')
 cloudinary.config(clConfig)
 
 
-// get routes
-router.get('/', isLoggedIn, async (req, res) => {
-    try{
-    const allArtists = await db.user.findAll()
-    res.render('artists/index', {artists: allArtists})
-    console.log(req.user)
-    } catch(err) {
-        console.log(err)
-    }
-    
-})
-
+// Get routes
 router.get('/setup', isLoggedIn, async (req, res) => {
     console.log(req.user)
-    if (req.user.usertype != 'artist' || req.user.setupComplete == 'true') {
+    if (req.user.usertype != 'gallery' || req.user.setupComplete == 'true') {
         res.redirect('/')
     } else {
-        res.render('artists/setup')
+        res.render('galleries/setup')
     }
     
 })
 
-router.get('/:id', isLoggedIn, async (req, res) =>{
-    try {
-        const artist = await db.user.findOne({
-            where: {
-                id: req.params.id
-            },
-            include: [db.work]
-        })
-        res.render('artists/profile', {artist: artist, works: artist.works})
-    } catch (error) {
-        console.log(error)
-    }
-})
 
-
-
+//  Put Route
 // put routes
 router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) =>{
     // let streamUpload = (req) => {
@@ -74,21 +49,23 @@ router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) 
         try {
         // let result = await streamUpload(req);
         // console.log(result);
-        const thisArtist = await db.artist.findOne({
+        const thisGallery = await db.gallery.findOne({
             where: {userId: req.user.id},
             include: [db.user]
         })
-        const updatedArtist = await thisArtist.update({
+        const updatedGallery = await thisGallery.update({
             // profileImage: result.url,
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
+            name: req.body.name,
+            phone_number: req.body.phone_number,
+            address: req.body.address,
             city: req.body.city,
             state: req.body.state,
-            age: req.body.age,
-            bio: req.body.bio,
+            zipcode: req.body.zipcode,
+            owner: req.body.owner,
+            description: req.body.description,
             setupComplete: req.body.setupComplete
         })
-        console.log(updatedArtist)
+        console.log(updatedGallery)
         console.log(req.user)
         res.redirect(`/`)
         } catch (err){
@@ -99,12 +76,6 @@ router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) 
     // upload(req);
 
 })
-
-
-
-
-
-
 
 
 module.exports = router

@@ -53,6 +53,8 @@ app.get('/', (req, res) => {
 app.use('/auth', require('./controllers/auth'));
 app.use('/artists', require('./controllers/artists'));
 app.use('/works', require('./controllers/works'));
+app.use('/galleries', require('./controllers/galleries'));
+
 
 
 
