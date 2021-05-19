@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.gallery.belongsTo(models.user)
-      // models.gallery.hasMany(models.collection)
+      models.gallery.belongsToMany(models.work, {through: 'worksGalleries'})   
     }
   };
   gallery.init({

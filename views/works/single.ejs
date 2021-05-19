@@ -3,5 +3,7 @@
 <div><%= work.description %></div>
 <div>By <%= work.artist.first_name %> <%= work.artist.last_name %>, <%= work.yearCreated %></div>
 <% if (currentUser.usertype == 'gallery') { %>
-    <input type="submit" value="Add to Collection">
+    <form action="/galleries/favorite/<%= work.id %>" method="post">
+    <input type="submit" value="Add to Favorites">
+</form>
 <% } %> 

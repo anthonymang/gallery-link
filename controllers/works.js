@@ -17,15 +17,6 @@ router.get('/create', isLoggedIn, async (req, res) => {
     res.render('works/create')
 })
 
-router.get('/:id', isLoggedIn, async (req, res)=>{
-    const thisWork = await db.work.findOne({
-        where: {
-            id: req.params.id
-        },
-        include: [db.artist]
-    })
-    res.render('works/single', {work: thisWork})
-})
 
 router.get('/edit/:id', isLoggedIn, async (req, res)=>{
     const thisWork = await db.work.findOne({
@@ -37,6 +28,18 @@ router.get('/edit/:id', isLoggedIn, async (req, res)=>{
         res.render('works/edit', {work: thisWork})
     }
 })
+
+router.get('/:id', isLoggedIn, async (req, res)=>{
+    const thisWork = await db.work.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: [db.artist]
+    })
+    res.render('works/single', {work: thisWork})
+})
+
+
 
 
 // Post route
@@ -90,6 +93,7 @@ router.post('/create', isLoggedIn, upload.single('imageUpload'), async (req, res
     upload(req);
 
 })
+
 
 // put route
 router.put('/edit/:idx', isLoggedIn, async (req, res)=>{

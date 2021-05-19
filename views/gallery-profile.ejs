@@ -11,5 +11,15 @@
 <p>Owner: <%= gallery.owner %></p>
 <p>Description: <%= gallery.description %></p>
 
+<% if (favorites.length > 0) { %>
+<h3>Favorites</h3>
 
+<% favorites.forEach(f => { %>
+    <img src="<%= f.imageFile %>" alt="<%= f.description %>">
+    <!-- <form action="/works/delete?_method=DELETE" method="post">
+        <input type="hidden" name="id" value='<%= // w.id %>'>
+        <input type="submit" value="Delete Work">
+    </form> -->
+<% }) %>
+<% } %>
 

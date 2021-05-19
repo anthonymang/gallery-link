@@ -64,9 +64,10 @@ app.get('/profile', isLoggedIn, async (req, res)=>{
     const thisGallery = await db.gallery.findOne({
       where: {
         userId: req.user.id
-      }
+      },
+      include: [db.work]
     })
-    res.render('gallery-profile', {gallery: thisGallery});
+    res.render('gallery-profile', {gallery: thisGallery, favorites: thisGallery.works});
   } else {
     const thisArtist = await db.artist.findOne({
       where: {

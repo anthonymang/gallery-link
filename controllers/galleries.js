@@ -19,15 +19,6 @@ router.get('/', isLoggedIn, async (req, res) =>{
     res.render('galleries/index', {galleries: allGalleries})
 })
 
-router.get('/:id', isLoggedIn, async (req, res) =>{
-    const thisGallery = await db.gallery.findOne({
-        where: { id: req.params.id }
-    })
-    res.render('galleries/single', {gallery: thisGallery})
-})
-
-
-
 
 router.get('/setup', isLoggedIn, async (req, res) => {
     console.log(req.user)
@@ -40,7 +31,29 @@ router.get('/setup', isLoggedIn, async (req, res) => {
 })
 
 
-//  Put Route
+router.get('/:id', isLoggedIn, async (req, res) =>{
+    const thisGallery = await db.gallery.findOne({
+        where: { id: req.params.id }
+    })
+    res.render('galleries/single', {gallery: thisGallery})
+})
+
+//  Post Route
+
+router.post('/favorite/:id', isLoggedIn, async (req,res)=>{
+    const thisGallery = await db.gallery.findOne({
+        where: {userId: req.user.id}
+    })
+
+    const thisWork = await db.work.findOne({
+        where: {id: req.params.id}
+    })
+    thisGallery.addWork(thisWork)
+
+    res.redirect(`/works/${req.params.id}`)
+})
+
+
 // put routes
 router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) =>{
     // let streamUpload = (req) => {

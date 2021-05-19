@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.work.belongsTo(models.artist)
       models.work.belongsTo(models.user)
+      models.work.belongsToMany(models.gallery, {through: 'worksGalleries'})
     }
   };
   work.init({
