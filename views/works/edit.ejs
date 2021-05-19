@@ -1,0 +1,27 @@
+<h2>Edit Work</h2>
+<h3>Current Work Information</h3>
+<div>Title: <%= work.title %></div>
+<div>Year Created: <%= work.yearCreated %></div>
+<div>Description: <%= work.description %></div>
+<div>Discipline: <%= work.discipline %></div>
+
+<h3>Update Work Information</h3>
+<h4>Please Fill Out All Fields (even if information has not changed)</h4>
+<form action="/works/edit/<%= work.id%>?_method=PUT" method="post">
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title" required>
+    <label for="yearCreated">Year created:</label>
+    <input type="text" name="yearCreated" id="yearCreated" required>
+    <label for="description">Description:</label>
+    <input type="text" name="description" id="description" required>
+    <label for="discipline">Discipline:</label>
+    <select name="discipline" id="discipline">
+        <option value="digital">Digital</option>
+        <option value="drawing">Drawing</option>
+        <option value="painting">Painting</option>
+        <option value="photography">Photography</option>
+        <option value="printmaking">Printmaking</option>
+        <option value="sculpture">Sculpture</option>  
+        <option value="other">Other</option>
+      </select>
+ <input type="submit" value="Save Changes">

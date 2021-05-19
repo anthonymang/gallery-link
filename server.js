@@ -13,6 +13,7 @@ const cloudinary = require('cloudinary').v2
 const streamifier = require('streamifier')
 cloudinary.config(clConfig)
 const methodOverride = require('method-override');
+const db = require('./models');
 
 const SECRET_SESSION = process.env.SECRET_SESSION
 // console.log(SECRET_SESSION)
@@ -58,9 +59,23 @@ app.use('/galleries', require('./controllers/galleries'));
 
 
 
-app.get('/profile', isLoggedIn, (req, res)=>{
-  const { id, name, email } = req.user.get();
-  res.render('profile', {id, name, email});
+app.get('/profile', isLoggedIn, async (req, res)=>{
+  if (req.user.usertype == 'gallery') {
+    const thisGallery = await db.gallery.findOne({
+      where: {
+        userId: req.user.id
+      }
+    })
+    res.render('gallery-profile', {gallery: thisGallery});
+  } else {
+    const thisArtist = await db.artist.findOne({
+      where: {
+        userId: req.user.id
+      },
+      include: [db.work]
+    })
+    res.render('artist-profile', {artist: thisArtist, works: thisArtist.works})
+  }
 });
 
 

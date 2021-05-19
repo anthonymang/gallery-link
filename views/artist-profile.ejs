@@ -1,0 +1,24 @@
+<h2>Profile</h2>
+
+<img src="<%= artist.profileImage %>" alt="<%= artist.first_name %> <%= artist.last_name %>">
+<p>First Name: <%= artist.first_name %></p>
+<p>Last Name: <%= artist.last_name %></p>
+<p>Email: <%= artist.email %></p>
+<p>City: <%= artist.city %></p>
+<p>State: <%= artist.state %></p>
+<p>Age: <%= artist.age %></p>
+<p>Bio: <%= artist.bio %></p>
+
+<% works.forEach(w => { %>
+    <img src="<%= w.imageFile %>" alt="<%= w.description %>">
+    <form action="/works/edit/<%= w.id %>" method="get">
+        <input type="submit" value="Edit Work">
+    </form>
+    <form action="/works/delete?_method=DELETE" method="post">
+        <input type="hidden" name="id" value='<%= w.id %>'>
+        <input type="submit" value="Delete Work">
+    </form>
+<% }) %>
+
+
+

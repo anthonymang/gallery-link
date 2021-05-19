@@ -13,6 +13,22 @@ cloudinary.config(clConfig)
 
 
 // Get routes
+
+router.get('/', isLoggedIn, async (req, res) =>{
+    const allGalleries = await db.gallery.findAll()
+    res.render('galleries/index', {galleries: allGalleries})
+})
+
+router.get('/:id', isLoggedIn, async (req, res) =>{
+    const thisGallery = await db.gallery.findOne({
+        where: { id: req.params.id }
+    })
+    res.render('galleries/single', {gallery: thisGallery})
+})
+
+
+
+
 router.get('/setup', isLoggedIn, async (req, res) => {
     console.log(req.user)
     if (req.user.usertype != 'gallery' || req.user.setupComplete == 'true') {

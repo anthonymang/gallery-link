@@ -2,6 +2,6 @@
 
 <ul>
 <% artists.forEach(artist =>{ %>
-    <li><a href="/artists/<%=artist.id%>"><%= artist.name %></a></li>
+    <li><a href="/artists/<%=artist.id%>"><%= artist.first_name %> <%= artist.last_name %></a></li>
 <% }) %>
 </ul>

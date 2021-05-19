@@ -3,10 +3,20 @@
 <form action="/works/create" method="post" enctype="multipart/form-data">
 <label for="title">Title:</label>
 <input type="text" name="title" id="title" required>
-<label for="createdDate">Year created:</label>
-<input type="text" name="createdDate" id="createdDate" required>
-<label for="description">Description</label>
+<label for="yearCreated">Year created:</label>
+<input type="text" name="yearCreated" id="yearCreated" required>
+<label for="description">Description:</label>
 <input type="text" name="description" id="description" required>
+<label for="discipline">Discipline:</label>
+<select name="discipline" id="discipline">
+    <option value="digital">Digital</option>
+    <option value="drawing">Drawing</option>
+    <option value="painting">Painting</option>
+    <option value="photography">Photography</option>
+    <option value="printmaking">Printmaking</option>
+    <option value="sculpture">Sculpture</option>  
+    <option value="other">Other</option>
+  </select>
 <label for="addImage">Add Image</label>
 <input id="imageUpload" type="file" name="imageUpload" required />
 <input type="submit" value="Submit">

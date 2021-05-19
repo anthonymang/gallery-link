@@ -1,8 +1,8 @@
-<h1><%= artist.name %></h1>
+<h1><%= artist.first_name %> <%= artist.last_name %></h1>
 
 <ul>
 <% works.forEach(work =>{ %>
-    <li><%=work.title %>, <%= work.createdDate %> </li>
+    <li><%=work.title %>, <%= work.yearCreated %> </li>
     <img src="<%= work.imageFile %>" alt="<%= work.description %>">
     <div><%= work.description %></div>
 <% }) %> 

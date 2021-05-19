@@ -22,10 +22,22 @@ router.get('/:id', isLoggedIn, async (req, res)=>{
         where: {
             id: req.params.id
         },
-        include: [db.user]
+        include: [db.artist]
     })
     res.render('works/single', {work: thisWork})
 })
+
+router.get('/edit/:id', isLoggedIn, async (req, res)=>{
+    const thisWork = await db.work.findOne({
+        where: {id: req.params.id}
+    })
+    if (req.user.id != thisWork.userId){
+        res.redirect('/')
+    } else {
+        res.render('works/edit', {work: thisWork})
+    }
+})
+
 
 // Post route
 router.post('/create', isLoggedIn, upload.single('imageUpload'), async (req, res) =>{
@@ -51,15 +63,23 @@ router.post('/create', isLoggedIn, upload.single('imageUpload'), async (req, res
         try {
         let result = await streamUpload(req);
         console.log(result);
+        const thisArtist = await db.artist.findOne({
+            where: {userId: req.user.id}
+        })
+        const newWork = await thisArtist.createWork({
+            imageFile: result.url,
+            title: req.body.title,
+            yearCreated: req.body.yearCreated,
+            description: req.body.description,
+            discipline: req.body.discipline,
+        })
+
         const thisUser = await db.user.findOne({
             where: {id: req.user.id}
         })
-        const newWork = await thisUser.createWork({
-            imageFile: result.url,
-            title: req.body.title,
-            createdDate: req.body.createdDate,
-            description: req.body.description
-        })
+
+        const addedWork = await thisUser.addWork(newWork)
+
         console.log(newWork)
         res.redirect(`/artists/${req.user.id}`)
         } catch (err){
@@ -70,5 +90,38 @@ router.post('/create', isLoggedIn, upload.single('imageUpload'), async (req, res
     upload(req);
 
 })
+
+// put route
+router.put('/edit/:idx', isLoggedIn, async (req, res)=>{
+    try {
+        const thisWork = await db.work.findOne({
+            where: {id: req.params.idx}
+        })
+        const updatedWork = await thisWork.update({
+            title: req.body.title,
+            yearCreated: req.body.yearCreated,
+            description: req.body.description,
+            discipline: req.body.discipline,
+        })
+        console.log(updatedWork)
+        res.redirect(`/works/${req.params.idx}`)
+    } catch (error) {
+        console.log(error)
+}})
+
+// delete route
+router.delete('/delete', isLoggedIn, async (req, res)=> {
+    try {
+        const deleted = await db.work.destroy({
+            where:{ id: req.body.id }
+        })
+        console.log(deleted)
+        res.redirect('/profile')
+    } catch (error) {
+        console.log(error)   
+    }
+})
+
+
 
 module.exports = router

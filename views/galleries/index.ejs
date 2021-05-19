@@ -1,0 +1,7 @@
+<h1>Galleries</h1>
+
+<ul>
+<% galleries.forEach(g =>{ %>
+    <li><a href="/galleries/<%=g.id%>"><%= g.name %></a></li>
+<% }) %>
+</ul>
