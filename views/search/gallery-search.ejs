@@ -1,0 +1,13 @@
+<h1>Search Galleries</h1>
+
+<form action="/search/results" method="get">
+    <input type="hidden" name="search" value="gallery">
+    <select name="target" id="target">
+        <option value="name">Name</option>
+        <option value="city">City</option>
+        <option value="state">State</option>
+        <option value="description">Description</option>
+    </select>
+    <input type="text" name="query" id="query">
+    <input type="submit" value="Search">
+</form>

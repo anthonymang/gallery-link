@@ -1,0 +1,13 @@
+<h1>Search Works</h1>
+
+<form action="/search/results" method="get">
+    <input type="hidden" name="search" value="work">
+    <select name="target" id="target">
+        <option value="title">Title</option>
+        <option value="yearCreated">Year Created</option>
+        <option value="description">Description</option>
+        <option value="discipline">Discipline</option>
+    </select>
+    <input type="text" name="query" id="query">
+    <input type="submit" value="Search">
+</form>

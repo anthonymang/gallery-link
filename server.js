@@ -16,12 +16,7 @@ const methodOverride = require('method-override');
 const db = require('./models');
 const mailer = require("nodemailer");
 
-
-
-
-
 const SECRET_SESSION = process.env.SECRET_SESSION
-// console.log(SECRET_SESSION)
 
 app.set('view engine', 'ejs');
 
@@ -31,8 +26,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
 app.use(methodOverride('_method'));
-
-
 
 app.use(session({
   secret: SECRET_SESSION,
@@ -52,29 +45,11 @@ app.use((req, res, next) =>{
 
 // ROUTES
 
-
-app.get('/search', isLoggedIn, async (req,res)=>{
-  res.render('search')
-})
-
-app.get('/searchresults', isLoggedIn, async (req,res)=>{
-  console.log(req.query)
-  res.json(req.query)
-})
-
-
+// Get Routes
 
 app.get('/', (req, res) => {
   res.render('index');
 });
-
-app.use('/auth', require('./controllers/auth'));
-app.use('/artists', require('./controllers/artists'));
-app.use('/works', require('./controllers/works'));
-app.use('/galleries', require('./controllers/galleries'));
-
-
-
 
 app.get('/profile', isLoggedIn, async (req, res)=>{
   if (req.user.usertype == 'gallery') {
@@ -97,6 +72,15 @@ app.get('/profile', isLoggedIn, async (req, res)=>{
 });
 
 
+// Controllers
+app.use('/auth', require('./controllers/auth'));
+app.use('/artists', require('./controllers/artists'));
+app.use('/works', require('./controllers/works'));
+app.use('/galleries', require('./controllers/galleries'));
+app.use('/search', require('./controllers/search'));
+
+
+// Port
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
   console.log(`🎧 You're listening to the smooth sounds of port ${PORT} 🎧`);
