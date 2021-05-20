@@ -67,7 +67,7 @@ router.post('/favorite/:id', isLoggedIn, async (req,res)=>{
     let emailRecipient = thisWork.user.dataValues.email
     let mailOptions = {
         from: 'anthonymang7370@gmail.com',
-        to: 'anthonymanganielloDA@gmail.com', //emailRecipient,
+        to: emailRecipient,
         subject: 'GalleryLink - Your work was added to favorites!',
         text: `Congrats! ${thisGallery.name} added your piece, ${thisWork.title}, to their collection of favorites.`
     }
