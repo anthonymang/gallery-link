@@ -15,9 +15,6 @@ cloudinary.config(clConfig)
 const methodOverride = require('method-override');
 const db = require('./models');
 
-// Mailchimp
-const mailchimpKey = process.env.MC_API_KEY
-const mailchimpTx = require("@mailchimp/mailchimp_transactional")(mailchimpKey);
 
 
 const SECRET_SESSION = process.env.SECRET_SESSION
@@ -49,17 +46,21 @@ app.use((req, res, next) =>{
   next();
 })
 
-async function run() {
-  const response = await mailchimpTx.users.ping();
-  console.log('-----Mailchimp Response-----')
-  console.log(response);
-}
-
-run();
-
-
 
 // ROUTES
+
+
+app.get('/search', isLoggedIn, async (req,res)=>{
+  res.render('search')
+})
+
+app.get('/searchresults', isLoggedIn, async (req,res)=>{
+  console.log(req.query)
+  res.json(req.query)
+})
+
+
+
 app.get('/', (req, res) => {
   res.render('index');
 });
