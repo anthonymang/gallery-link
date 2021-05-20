@@ -14,6 +14,9 @@ const streamifier = require('streamifier')
 cloudinary.config(clConfig)
 const methodOverride = require('method-override');
 const db = require('./models');
+const mailer = require("nodemailer");
+
+
 
 
 

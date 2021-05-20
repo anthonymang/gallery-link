@@ -8,9 +8,22 @@ const multer = require('multer')
 const upload = multer()
 const clConfig = require('../cloudinary-config')
 const cloudinary = require('cloudinary').v2
-const streamifier = require('streamifier')
+const streamifier = require('streamifier');
 cloudinary.config(clConfig)
+const mailer = require("nodemailer");
 
+
+let transporter = mailer.createTransport({
+    service: 'gmail',
+    auth: {
+      type: 'OAuth2',
+      user: process.env.MAIL_USERNAME,
+      pass: process.env.MAIL_PASSWORD,
+      clientId: process.env.OAUTH_CLIENTID,
+      clientSecret: process.env.OAUTH_CLIENT_SECRET,
+      refreshToken: process.env.OAUTH_REFRESH_TOKEN
+    }
+  });
 
 // Get routes
 
@@ -46,9 +59,25 @@ router.post('/favorite/:id', isLoggedIn, async (req,res)=>{
     })
 
     const thisWork = await db.work.findOne({
-        where: {id: req.params.id}
+        where: {id: req.params.id},
+        include: [db.user]
     })
     thisGallery.addWork(thisWork)
+    console.log(thisWork)
+    let emailRecipient = thisWork.user.dataValues.email
+    let mailOptions = {
+        from: 'anthonymang7370@gmail.com',
+        to: 'anthonymanganielloDA@gmail.com', //emailRecipient,
+        subject: 'GalleryLink - Your work was added to favorites!',
+        text: `Congrats! ${thisGallery.name} added your piece, ${thisWork.title}, to their collection of favorites.`
+    }
+    transporter.sendMail(mailOptions, function(err, data) {
+        if (err) {
+          console.log("Error " + err);
+        } else {
+          console.log("Email sent successfully");
+        }
+      });
 
     res.redirect(`/works/${req.params.id}`)
 })
