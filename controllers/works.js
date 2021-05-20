@@ -114,6 +114,26 @@ router.put('/edit/:idx', isLoggedIn, async (req, res)=>{
 }})
 
 // delete route
+
+
+router.delete('/remove', isLoggedIn, async (req,res)=>{
+    const thisGallery = await db.gallery.findOne({
+        where: {
+            userId: req.user.id
+        }
+    })
+    const thisWork = await db.work.findOne({
+        where: {
+            id: req.body.id
+        }
+    })
+
+    const removedWork = await thisGallery.removeWork(thisWork)
+    res.redirect('/profile')
+
+})
+
+
 router.delete('/delete', isLoggedIn, async (req, res)=> {
     try {
         const deleted = await db.work.destroy({

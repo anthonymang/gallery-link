@@ -16,10 +16,10 @@
 
 <% favorites.forEach(f => { %>
     <img src="<%= f.imageFile %>" alt="<%= f.description %>">
-    <!-- <form action="/works/delete?_method=DELETE" method="post">
-        <input type="hidden" name="id" value='<%= // w.id %>'>
-        <input type="submit" value="Delete Work">
-    </form> -->
+    <form action="/works/remove?_method=DELETE" method="post">
+        <input type="hidden" name="id" value='<%=  f.id %>'>
+        <input type="submit" value="Remove Favorite">
+    </form>
 <% }) %>
 <% } %>
 

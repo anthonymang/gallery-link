@@ -56,33 +56,33 @@ router.post('/favorite/:id', isLoggedIn, async (req,res)=>{
 
 // put routes
 router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) =>{
-    // let streamUpload = (req) => {
-    //     // returns new promise object to upload the file to cloudinary
-    //     // if successful, resolve promise, else reject promise
-    //     return new Promise((resolve, reject) => {
-    //         let stream = cloudinary.uploader.upload_stream(
-    //           (error, result) => {
-    //             if (result) {
-    //               resolve(result);
-    //             } else {
-    //               reject(error);
-    //             }
-    //           }
-    //         );
-    //         // makes req.file.buffer readable??
-    //        streamifier.createReadStream(req.file.buffer).pipe(stream);
-    //     });
-    // };
+    let streamUpload = (req) => {
+        // returns new promise object to upload the file to cloudinary
+        // if successful, resolve promise, else reject promise
+        return new Promise((resolve, reject) => {
+            let stream = cloudinary.uploader.upload_stream(
+              (error, result) => {
+                if (result) {
+                  resolve(result);
+                } else {
+                  reject(error);
+                }
+              }
+            );
+            // makes req.file.buffer readable??
+           streamifier.createReadStream(req.file.buffer).pipe(stream);
+        });
+    };
     // writing upload file that uploads once streamUpload is complete
-    // async function upload(req) {
+    async function upload(req) {
         try {
-        // let result = await streamUpload(req);
-        // console.log(result);
+        let result = await streamUpload(req);
+        console.log(result);
         const thisGallery = await db.gallery.findOne({
             where: {userId: req.user.id}
         })
         const updatedGallery = await thisGallery.update({
-            // profileImage: result.url,
+            profileImage: result.url,
             name: req.body.name,
             phone_number: req.body.phone_number,
             address: req.body.address,
@@ -107,9 +107,9 @@ router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) 
         } catch (err){
         console.log(err)
     }
-    // }
+    }
     // invoking upload function
-    // upload(req);
+    upload(req);
 
 })
 

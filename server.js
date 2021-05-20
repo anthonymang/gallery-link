@@ -15,6 +15,11 @@ cloudinary.config(clConfig)
 const methodOverride = require('method-override');
 const db = require('./models');
 
+// Mailchimp
+const mailchimpKey = process.env.MC_API_KEY
+const mailchimpTx = require("@mailchimp/mailchimp_transactional")(mailchimpKey);
+
+
 const SECRET_SESSION = process.env.SECRET_SESSION
 // console.log(SECRET_SESSION)
 
@@ -43,6 +48,14 @@ app.use((req, res, next) =>{
   res.locals.currentUser = req.user;
   next();
 })
+
+async function run() {
+  const response = await mailchimpTx.users.ping();
+  console.log('-----Mailchimp Response-----')
+  console.log(response);
+}
+
+run();
 
 
 
