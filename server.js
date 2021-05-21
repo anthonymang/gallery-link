@@ -47,7 +47,7 @@ app.use((req, res, next) =>{
 
 // Get Routes
 
-app.get('/', (req, res) => {
+app.get('/', isLoggedIn, (req, res) => {
   res.render('index');
 });
 

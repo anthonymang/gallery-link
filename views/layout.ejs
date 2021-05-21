@@ -10,24 +10,78 @@
   <body>
     <%- include('partials/alerts') %> 
     <header>
-      <nav>
-        <ul>
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/">GalleryLink</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
           <% if (!currentUser) { %> 
-            <li><a href="/auth/signup">Signup</a></li>
-            <li><a href="/auth/login">Login</a></li>
+            <ul class="navbar-nav mr-auto nav-right">
+
+              <li class="nav-item active">
+                <a class="nav-link" href="/auth/login">Log In</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/auth/signup">Sign Up</a>
+              </li>
+              </ul>
             <% } else { %> 
-              <li><a href="/artists">Artists</a></li>
-              <li><a href="/galleries">Galleries</a></li>
-              <li><a href="/auth/logout">Logout</a></li>
-              <li><a href="/profile">Profile</a></li>
+              <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Search
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/search/works">Works</a>
+                  <a class="dropdown-item" href="/search/artists">Artists</a>
+                  <a class="dropdown-item" href="/search/galleries">Galleries</a>
+                </div>
+                <li class="nav-item">
+                  <a class="nav-link" href="/artists">Artists</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/Galleries">Galleries</a>
+                </li>
+
+                <% if (currentUser.usertype == 'artist') { %>
+                  <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Works
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/works">All Works</a>
+                    <a class="dropdown-item" href="/works/create">Create Work</a>
+                  </div>
+                <% } else { %>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="/works">Works</a>
+                </li>
+                <% } %>
+              </ul>
+              <ul class="navbar-nav mr-auto nav-right">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Account
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/profile">Profile</a>
+                    <a class="dropdown-item" href="/auth/logout">Log Out</a>
+                  </div>
+                </ul>
           <% } %> 
         </ul>
+
+        </div>
       </nav>
+
     </header>
-    <h1>GalleryLink</h1>
     
     <%- body %>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src=“https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js” integrity=“sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0” crossorigin=“anonymous”></script>
   </body>
 </html>

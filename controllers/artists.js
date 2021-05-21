@@ -42,6 +42,7 @@ router.get('/:id', isLoggedIn, async (req, res) =>{
             },
             include: [db.work]
         })
+        console.log(artist.works)
         res.render('artists/single', {artist: artist, works: artist.works})
     } catch (error) {
         console.log(error)
