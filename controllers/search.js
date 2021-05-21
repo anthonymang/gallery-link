@@ -27,21 +27,21 @@ router.get('/results', isLoggedIn, async (req,res)=>{
         results = await db.gallery.findAll({
         where: {
             [target]: {
-                [Op.iLike]: `%${req.query.query}` }
+                [Op.iLike]: `%${req.query.query}%` }
         }
     })
     } else if (req.query.search == 'artist'){
         results = await db.artist.findAll({
         where: {
             [target]: {
-                [Op.iLike]: `%${req.query.query}` }
+                [Op.iLike]: `%${req.query.query}%` }
         }
     })
     } else {
         results = await db.work.findAll({
             where:  { 
                 [target]: {
-                    [Op.iLike]: `%${req.query.query}`}
+                    [Op.iLike]: `%${req.query.query}%`}
                 }
             })
         }
