@@ -10,115 +10,74 @@
   <body>
     <%- include('partials/alerts') %> 
     <header>
-      <!-- <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="/">GalleryLink</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-
-          <% //if (!currentUser) { %> 
-            <ul class="navbar-nav mr-auto nav-right">
-
-              <li class="nav-item active">
-                <a class="nav-link" href="/auth/login">Log In</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="/auth/signup">Sign Up</a>
-              </li>
-              </ul>
-            <% //} else { %> 
-              <ul class="navbar-nav mr-auto">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Search
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="/search/works">Works</a>
-                  <a class="dropdown-item" href="/search/artists">Artists</a>
-                  <a class="dropdown-item" href="/search/galleries">Galleries</a>
-                </div>
-                <li class="nav-item">
-                  <a class="nav-link" href="/artists">Artists</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/Galleries">Galleries</a>
-                </li>
-
-                <% //if (currentUser.usertype == 'artist') { %>
-                  <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Works
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/works">All Works</a>
-                    <a class="dropdown-item" href="/works/create">Create Work</a>
-                  </div>
-                <% //} else { %>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="/works">Works</a>
-                </li>
-                <%// } %>
-              </ul>
-              <ul class="navbar-nav mr-auto nav-right">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Account
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/profile">Profile</a>
-                    <a class="dropdown-item" href="/auth/logout">Log Out</a>
-                  </div>
-                </ul>
-          <% //} %> 
-        </ul>
-
-        </div>
-      </nav> -->
-
-
-      <nav class="navbar navbar-expand-lg">
+       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">GalleryLink</a>          
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
-<!-- CODE IS GOOD ABOVE HERE - MAKE EDITS TO CODE BELOW BASED ON CODE ABOVE. BOOTSTRAP 4 BELOW, BOOTSTRAP 5 ABOVEC -->
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <% if (!currentUser) { %> 
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-right">
+
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" href="/auth/login">Log In</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link active" href="/auth/signup">Sign Up</a>
               </li>
+              </ul>
+            <% } else { %> 
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
+                <a class="nav-link dropdown-toggle" href="#" id="search-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Search
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/search/works">Works</a>
+                  <a class="dropdown-item" href="/search/artists">Artists</a>
+                  <a class="dropdown-item" href="/search/galleries">Galleries</a>
+                </div>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/artists">Artists</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/Galleries">Galleries</a>
+                </li>
+
+                <% if (currentUser.usertype == 'artist') { %>
+                  <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="works-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Works
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/works">All Works</a>
+                    <a class="dropdown-item" href="/works/create">Create Work</a>
+                  </div>
+                <% } else { %>
+
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/works">Works</a>
+                </li>
+                <% } %>
+              </ul>
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-right">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Account
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/profile">Profile</a>
+                    <a class="dropdown-item" href="/auth/logout">Log Out</a>
+                  </div>
                 </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-              </li>
-            </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </nav>
+          <% } %> 
+          </ul>
+      </nav> 
 
     </header>
     
