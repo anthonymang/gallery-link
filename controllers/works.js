@@ -84,7 +84,7 @@ router.post('/create', isLoggedIn, upload.single('imageUpload'), async (req, res
         const addedWork = await thisUser.addWork(newWork)
 
         console.log(newWork)
-        res.redirect(`/artists/${req.user.id}`)
+        res.redirect(`/artists/${thisArtist.id}`)
         } catch (err){
         console.log(err)
     }

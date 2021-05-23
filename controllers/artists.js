@@ -40,10 +40,13 @@ router.get('/:id', isLoggedIn, async (req, res) =>{
             where: {
                 id: req.params.id
             },
-            include: [db.work]
         })
-        console.log(artist.works)
-        res.render('artists/single', {artist: artist, works: artist.works})
+        const works = await db.work.findAll({
+            where: {
+                artistId: artist.id
+            }
+        })
+        res.render('artists/single', {artist: artist, works: works})
     } catch (error) {
         console.log(error)
     }
