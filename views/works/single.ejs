@@ -1,9 +1,27 @@
-<h1><%= work.title %></h1>
-<img src="<%= work.imageFile %>" alt="<%= work.description %>">
-<div><%= work.description %></div>
-<div>By <%= work.artist.first_name %> <%= work.artist.last_name %>, <%= work.yearCreated %></div>
-<% if (currentUser.usertype == 'gallery') { %>
-    <form action="/galleries/favorite/<%= work.id %>" method="post">
-    <input type="submit" value="Add to Favorites">
-</form>
-<% } %> 
+<div class='row'>
+
+    <div class = 'col-3 profile-info affix'>
+    <h5><%= work.title %></h5>
+    <h6><%= work.artist.first_name %> <%= work.artist.last_name %></h6>
+    <p><%=work.description%></p>
+    <p><%=work.yearCreated%></p>
+    <p>Discipline: <%=work.discipline%></p>
+    
+    
+    </div>
+    
+    
+    <div class= 'col-9 offset-md-3 image-section'>
+        <div class='profile-works-favorites'>
+        <img src="<%= work.imageFile %>" alt="<%= work.description %>" class='single-work'>
+        <% if (currentUser.usertype == 'gallery') { %>
+            <form action="/galleries/favorite/<%= work.id %>" method="post">
+            <input type="submit" value="Add to Favorites" class='auth-button'>
+        </form>
+        <% } %> 
+    </div>
+</div>
+    </div>
+
+
+
