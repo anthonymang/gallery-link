@@ -1,24 +1,42 @@
-<h2>Profile</h2>
+<div class='row'>
 
-<img src="<%= artist.profileImage %>" alt="<%= artist.first_name %> <%= artist.last_name %>">
-<p>First Name: <%= artist.first_name %></p>
-<p>Last Name: <%= artist.last_name %></p>
-<p>Email: <%= artist.email %></p>
-<p>City: <%= artist.city %></p>
-<p>State: <%= artist.state %></p>
-<p>Age: <%= artist.age %></p>
-<p>Bio: <%= artist.bio %></p>
-
-<% works.forEach(w => { %>
-    <img src="<%= w.imageFile %>" alt="<%= w.description %>">
-    <form action="/works/edit/<%= w.id %>" method="get">
-        <input type="submit" value="Edit Work">
-    </form>
-    <form action="/works/delete?_method=DELETE" method="post">
-        <input type="hidden" name="id" value='<%= w.id %>'>
-        <input type="submit" value="Delete Work">
-    </form>
-<% }) %>
+    <div class = 'col-3 profile-info affix'>
+    <img src="<%=artist.profileImage%>" alt="<%=artist.first_name%> <%=artist.first_name%>" class='profileImage'>
+    <h5><%= artist.first_name %> <%= artist.last_name %></h5>
+    <p><%=artist.bio%></p>
+    <p>City: <%=artist.city%></p>
+    <p>State: <%=artist.state%></p>
+    <p>Email: <%=artist.email%></p>
+    
+    
+    </div>
+    
+    
+    <div class= 'col-9 offset-md-3 image-section'>
+    
+    <h1 class= 'single-header'>Your Works</h1>
+    
+    <div class= 'profile-works-favorites'>
+        <% if (works.length >0){ %>
+    <% works.forEach(work =>{ %>
+            <a href="/works/<%=work.id%>"><img src="<%= work.imageFile %>" alt="<%= work.description %>" class='work-image'>
+        <p><%=work.title %>, <%= work.yearCreated %> </p></a>
+        <form action="/works/edit/<%= work.id %>" method="get">
+            <input type="submit" value="Edit Work" class='auth-button'>
+        </form>
+        <form action="/works/delete?_method=DELETE" method="post">
+            <input type="hidden" name="id" value='<%= work.id %>'>
+            <input type="submit" value="Delete Work" class='auth-button'>
+        </form>
+    <% }) %> 
+    <% } else { %>
+        <h3>This artist has not added any works.</h3>
+    
+    <% } %>
+    </div>
+    
+    </div>
+    </div>
 
 
 

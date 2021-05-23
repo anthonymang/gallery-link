@@ -222,6 +222,15 @@ color: white;
   text-align: center;
  }
 
+ .profile-works-favorites{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+ }
+
 .work-image{
   max-width: 40vw;
   max-height: 35vh;
