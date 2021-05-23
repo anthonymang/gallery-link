@@ -1,10 +1,33 @@
+<div class='row'>
+
+<div class='col-2 search-left'></div>
+
+<div class='col-8 search-results'>
+    <br>
+<h1 class='results-header'>Search Results</h1>
 <% searchResults.forEach(r => { %>
     <% if (r.first_name) { %>
-    <p><a href="/artists/<%= r.id %>"><%= r.first_name %> <%= r.last_name %></a></p>
+    <div class= 'individual-results'>
+    <h4><a href="/artists/<%= r.id %>"><%= r.first_name %> <%= r.last_name %></a></h4>
+    <p><%= r.bio %></p>
+    </div>
+
     <% } else if (r.title){ %>
-    <p><a href="works/<%= r.id %>"><%= r.title%></p></a>
+    <div class= 'individual-results'>
+    <h4><a href="works/<%= r.id %>"><%= r.title%></a></h4>
+    <p><%= r.description %></p>
+    </div>
     <% } else{ %>
-    <p><a href="galleries/<%= r.id %>"></a><%=r.name%></p>
-    <img src="<%=r.profileImage%>">
+    <div class= 'individual-results'>
+    <h4><a href="galleries/<%= r.id %>"><%=r.name%></a></h4>
+    <p><%= r.description %></p>
+    </div>
     <% } %>
 <% }) %>
+
+</div>
+
+<div class='col-2 search-right'></div>
+
+
+</div>

@@ -20,7 +20,7 @@ ul li {
 
 a {
   color: inherit;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 a:hover {
@@ -159,4 +159,30 @@ color: white;
 
 .search-select{
   width: 20vw;
+}
+
+.search-results {
+  background-color:  #e3c7a5;
+  min-height: 90vh;
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+}
+
+.individual-results {
+  padding: 5px 5px;
+  margin-top: 5px;
+  margin-left: 7.5vw;
+  margin-right: 7.5vw;
+  background-color: #292929;
+  color: white;
+  border-radius: 5px;
+}
+
+.results-header{
+  margin-left: 7.5vw;
+}
+
+.search-left, .search-right{
+  min-height: 90vh;
+  background-color: black;
 }

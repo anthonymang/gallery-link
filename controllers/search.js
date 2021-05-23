@@ -7,17 +7,6 @@ const { Op } = require("sequelize");
 
 
 
-router.get('/artists', isLoggedIn, async (req,res)=>{
-    res.render('search/artist-search')
-  })
-
-router.get('/works', isLoggedIn, async (req,res)=>{
-    res.render('search/work-search')
-  })
-
-router.get('/galleries', isLoggedIn, async (req,res)=>{
-    res.render('search/gallery-search')
-  })
   
 router.get('/results', isLoggedIn, async (req,res)=>{
     console.log(req.query)
