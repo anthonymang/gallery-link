@@ -1,14 +1,20 @@
+<div class = 'row'>
+
+  <div class= 'setup col'></div>
+
+<div class = 'setup-form col-7'>
+
 <h1>New Work</h1>
 
 <form action="/works/create" method="post" enctype="multipart/form-data">
-<label for="title">Title:</label>
-<input type="text" name="title" id="title" required>
-<label for="yearCreated">Year created:</label>
-<input type="text" name="yearCreated" id="yearCreated" required>
-<label for="description">Description:</label>
-<input type="text" name="description" id="description" required>
-<label for="discipline">Discipline:</label>
-<select name="discipline" id="discipline">
+<label for="title" class="form-label">Title:</label>
+<input type="text" name="title" id="title" class="form-control"  required>
+<label for="yearCreated" class="form-label">Year created:</label>
+<input type="text" name="yearCreated" id="yearCreated" class="form-control"  required>
+<label for="description" class="form-label">Description:</label>
+<input type="text" name="description" id="description" class="form-control"  required>
+<label for="discipline" class="form-label">Discipline:</label>
+<select name="discipline" class="form-select" id="discipline">
     <option value="digital">Digital</option>
     <option value="drawing">Drawing</option>
     <option value="painting">Painting</option>
@@ -17,8 +23,14 @@
     <option value="sculpture">Sculpture</option>  
     <option value="other">Other</option>
   </select>
-<label for="addImage">Add Image</label>
+<label for="addImage" class="form-label" class="form-control" >Add Image</label>
 <input id="imageUpload" type="file" name="imageUpload" required />
-<input type="submit" value="Submit">
+<input type="submit" value="Submit" class = 'auth-button'>
 
 </form>
+
+</div>
+
+<div class= 'setup col'></div>
+
+</div>

@@ -47,8 +47,32 @@ app.use((req, res, next) =>{
 
 // Get Routes
 
-app.get('/', isLoggedIn, (req, res) => {
-  res.render('index');
+app.get('/', isLoggedIn, async (req, res) => {
+  const artistList = await db.artist.findAll()
+  const workList = await db.work.findAll()
+  const galleryList = await db.gallery.findAll()
+
+  const featuredArtist = await db.artist.findOne({
+    where: {
+      id: Math.floor(Math.random() * artistList.length)
+    }
+  })
+
+  const featuredWork = await db.work.findOne({
+    where: {
+      id: Math.floor(Math.random() * workList.length)
+    }
+  })
+
+  const featuredGallery = await db.gallery.findOne({
+    where: {
+      id: Math.floor(Math.random() * galleryList.length)
+    }
+  })
+  console.log(featuredArtist)
+
+
+  res.render('index', {featuredArtist: featuredArtist, featuredGallery: featuredGallery, featuredWork: featuredWork})
 });
 
 app.get('/profile', isLoggedIn, async (req, res)=>{
