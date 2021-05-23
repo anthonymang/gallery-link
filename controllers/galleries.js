@@ -48,9 +48,10 @@ router.get('/setup', isLoggedIn, async (req, res) => {
 
 router.get('/:id', isLoggedIn, async (req, res) =>{
     const thisGallery = await db.gallery.findOne({
-        where: { id: req.params.id }
+        where: { id: req.params.id },
+        include: [db.work]
     })
-    res.render('galleries/single', {gallery: thisGallery})
+    res.render('galleries/single', {gallery: thisGallery, favorites: thisGallery.works})
 })
 
 //  Post Route

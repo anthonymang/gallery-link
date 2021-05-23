@@ -1,13 +1,36 @@
-<h1><%= gallery.name %></h1>
+<div class='row'>
 
-<img src="<%= gallery.profileImage %>" alt="<%= gallery.name %>">
+    <div class = 'col-3 profile-info affix'>
+    <img src="<%=gallery.profileImage%>" alt="<%=gallery.name%>" class='profileImage'>
+    <h5><%= gallery.name %></h5>
 
-<div><%= gallery.description %></div>
+    <p><%=gallery.description%></p>
+    <p>Address:</p>
+    <p><%=gallery.address%> <%=gallery.city%>, <%=gallery.state%> <%=gallery.zipcode%></p>
+    <p>Email: <%=gallery.email%></p>
+    <p>Phone: <%=gallery.phone_number%></p>
 
-<div>Contact</div>
-<ul>
-    <li>Owner: <%= gallery.owner %></li>
-    <li>Phone: <%= gallery.phone_number %></li>
-    <li>Email: <%= gallery.email %></li>
-    <li>Address: <%= gallery.address %> <%= gallery.city %>, <%= gallery.state %> <%= gallery.zipcode %></li>
-</ul>
+    
+    
+    </div>
+    
+    
+    <div class= 'col-9 offset-md-3 image-section'>
+    
+    <h1 class= 'single-header'>Favorite Works</h1>
+    
+    <div class= 'works-favorites'>
+        <% if (favorites.length >0){ %>
+    <% favorites.forEach(work =>{ %>
+            <a href="/works/<%=work.id%>"><img src="<%= work.imageFile %>" alt="<%= work.description %>" class='work-image'>
+        <p><%=work.title %>, <%= work.yearCreated %> </p></a>
+    <% }) %> 
+    <% } else { %>
+        <h3>This gallery has not added any favorites.</h3>
+    
+    <% } %>
+    </div>
+    
+    </div>
+    </div>
+

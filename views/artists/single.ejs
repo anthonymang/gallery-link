@@ -3,7 +3,6 @@
 <div class = 'col-3 profile-info affix'>
 <img src="<%=artist.profileImage%>" alt="<%=artist.first_name%> <%=artist.first_name%>" class='profileImage'>
 <h5><%= artist.first_name %> <%= artist.last_name %></h5>
-<p>Bio:</p>
 <p><%=artist.bio%></p>
 <p>City: <%=artist.city%></p>
 <p>State: <%=artist.state%></p>
@@ -18,10 +17,15 @@
 <h1 class= 'single-header'>Artist Works</h1>
 
 <div class= 'works-favorites'>
+    <% if (works.length >0){ %>
 <% works.forEach(work =>{ %>
         <a href="/works/<%=work.id%>"><img src="<%= work.imageFile %>" alt="<%= work.description %>" class='work-image'>
     <p><%=work.title %>, <%= work.yearCreated %> </p></a>
 <% }) %> 
+<% } else { %>
+    <h3>This artist has not added any works.</h3>
+
+<% } %>
 </div>
 
 </div>
