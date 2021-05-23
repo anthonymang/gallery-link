@@ -2,30 +2,58 @@
 
 <div class='col-8 homepage-search'>
         <h3>Search Artists</h3>
-<hr>
 <form action="/search/results" method="get" class='search-form'>
     <input type="hidden" name="search" value="artist">
-    <select name="target" id="target">
+    <select name="target" id="target" class='form-select search-select'>
         <option value="first_name">First Name</option>
         <option value="last_name">Last Name</option>
         <option value="city">City</option>
         <option value="state">State</option>
         <option value="bio">Bio</option>
     </select>
-    <input type="text" name="query" id="query">
+    <input type="text" name="query" id="query" class='form-control'>
     <input type="submit" value="Search">
 </form>
+<hr>
+
+<h3>Search Works</h3>
+<form action="/search/results" method="get" class='search-form'>
+    <input type="hidden" name="search" value="work">
+    <select name="target" id="target" class='form-select search-select'>
+        <option value="title">Title</option>
+        <option value="yearCreated">Year Created</option>
+        <option value="description">Description</option>
+        <option value="discipline">Discipline</option>
+    </select>
+    <input type="text" name="query" id="query" class='form-control'>
+    <input type="submit" value="Search">
+</form>
+
+<hr>
+<h3>Search Works</h3>
+<form action="/search/results" method="get" class='search-form'>
+    <input type="hidden" name="search" value="gallery">
+    <select name="target" id="target" class='form-select search-select'>
+        <option value="name">Name</option>
+        <option value="city">City</option>
+        <option value="State">State</option>
+        <option value="description">Description</option>
+    </select>
+    <input type="text" name="query" id="query" class='form-control'>
+    <input type="submit" value="Search">
+</form>
+
 </div>
 
 <div class= 'col-4 featuredSection'>
     <h5>Featured Artist</h5>
-    <img src="<%= featuredArtist.profileImage%>" alt="Featured Artist of the Day" class='featureImage'>
-    <h6><a href="/artists/<%=featuredArtist.id%>"><%=featuredArtist.first_name%> <%=featuredArtist.last_name%></a></h6>
+    <a href="/artists/<%=featuredArtist.id%>"><img src="<%= featuredArtist.profileImage%>" alt="Featured Artist of the Day" class='featureImage'>
+    <h6><%=featuredArtist.first_name%> <%=featuredArtist.last_name%></a></h6>
     <h5>Featured Gallery</h5>
-    <img src="<%= featuredGallery.profileImage%>" alt="Featured Gallery of the Day" class='featureImage'>
-    <h6><a href="/Galleries/<%=featuredGallery.id%>"><%=featuredGallery.name%></a></h6>
+    <a href="/Galleries/<%=featuredGallery.id%>"><img src="<%= featuredGallery.profileImage%>" alt="Featured Gallery of the Day" class='featureImage'>
+    <h6><%=featuredGallery.name%></a></h6>
     <h5>Featured Work</h5>
-    <img src="<%= featuredWork.imageFile%>" alt="Featured Work of the Day" class='featureImage'>
-    <h6><a href="/Works/<%=featuredWork.id%>"><%=featuredWork.title%></a></h6>
+    <a href="/Works/<%=featuredWork.id%>"><img src="<%= featuredWork.imageFile%>" alt="Featured Work of the Day" class='featureImage'>
+    <h6><%=featuredWork.title%></a></h6>
 </div>
 </div>

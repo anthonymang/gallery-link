@@ -119,17 +119,20 @@ font-size: 1.5em;
 }
 
 .homepage-search {
-  /* height: 45vh; */
+  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: rgb(227, 199, 165);
+  border-bottom: 3px solid black;
 }
+
 
 .search-form {
   display: flex;
   flex-direction: row;
+  width: 40vw
 }
 
 .featureImage{
@@ -152,4 +155,8 @@ font-size: 1.5em;
 hr {
 border-top: 1px solid white;
 color: white;
+}
+
+.search-select{
+  width: 20vw;
 }

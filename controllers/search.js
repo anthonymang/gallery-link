@@ -38,6 +38,14 @@ router.get('/results', isLoggedIn, async (req,res)=>{
         }
     })
     } else {
+        if (target == 'yearCreated') {
+            results = await db.work.findAll({
+                where:  { 
+                    yearCreated: req.query.query}
+                    
+                })
+            } else {
+        
         results = await db.work.findAll({
             where:  { 
                 [target]: {
@@ -45,6 +53,7 @@ router.get('/results', isLoggedIn, async (req,res)=>{
                 }
             })
         }
+    }
         console.log(results)
     res.render('search/results', {searchResults: results})
   })

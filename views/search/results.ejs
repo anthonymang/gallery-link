@@ -2,7 +2,7 @@
     <% if (r.first_name) { %>
     <p><a href="/artists/<%= r.id %>"><%= r.first_name %> <%= r.last_name %></a></p>
     <% } else if (r.title){ %>
-    <p><a href="works/<%= r.id %>">"><%= r.title%></p></a>
+    <p><a href="works/<%= r.id %>"><%= r.title%></p></a>
     <% } else{ %>
     <p><a href="galleries/<%= r.id %>"></a><%=r.name%></p>
     <img src="<%=r.profileImage%>">
