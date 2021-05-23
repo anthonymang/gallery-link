@@ -1,25 +1,39 @@
-<h2>Profile</h2>
+<div class='row'>
 
-<img src="<%= gallery.profileImage %>" alt="<%= gallery.name %>">
-<p>Name: <%= gallery.name %></p>
-<p>Phone: <%= gallery.phone_number %></p>
-<p>Email: <%= gallery.email %></p>
-<p>Address: <%= gallery.address %></p>
-<p>City: <%= gallery.city %></p>
-<p>State: <%= gallery.state %></p>
-<p>Zipcode: <%= gallery.zipcode %></p>
-<p>Owner: <%= gallery.owner %></p>
-<p>Description: <%= gallery.description %></p>
+    <div class = 'col-3 profile-info affix'>
+    <img src="<%=gallery.profileImage%>" alt="<%=gallery.name%>" class='profileImage'>
+    <h5><%= gallery.name %></h5>
 
-<% if (favorites.length > 0) { %>
-<h3>Favorites</h3>
+    <p><%=gallery.description%></p>
+    <p>Address:</p>
+    <p><%=gallery.address%> <%=gallery.city%>, <%=gallery.state%> <%=gallery.zipcode%></p>
+    <p>Email: <%=gallery.email%></p>
+    <p>Phone: <%=gallery.phone_number%></p>
 
-<% favorites.forEach(f => { %>
-    <img src="<%= f.imageFile %>" alt="<%= f.description %>">
-    <form action="/works/remove?_method=DELETE" method="post">
-        <input type="hidden" name="id" value='<%=  f.id %>'>
-        <input type="submit" value="Remove Favorite">
-    </form>
-<% }) %>
-<% } %>
-
+    
+    
+    </div>
+    
+    
+    <div class= 'col-9 offset-md-3 image-section'>
+    
+    <h1 class= 'single-header'>Favorite Works</h1>
+    
+    <div class= 'profile-works-favorites'>
+        <% if (favorites.length >0){ %>
+    <% favorites.forEach(work =>{ %>
+            <a href="/works/<%=work.id%>"><img src="<%= work.imageFile %>" alt="<%= work.description %>" class='work-image'>
+        <p><%=work.title %>, <%= work.yearCreated %> </p></a>
+        <form action="/works/remove?_method=DELETE" method="post">
+            <input type="hidden" name="id" value='<%=  work.id %>'>
+            <input type="submit" value="Remove Favorite" class='auth-button'>
+        </form>
+    <% }) %> 
+    <% } else { %>
+        <h3>This gallery has not added any favorites.</h3>
+    
+    <% } %>
+    </div>
+    
+    </div>
+    </div>
