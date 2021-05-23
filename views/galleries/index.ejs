@@ -1,7 +1,22 @@
-<h1>Galleries</h1>
+<div class='row'>
 
-<ul>
-<% galleries.forEach(g =>{ %>
-    <li><a href="/galleries/<%=g.id%>"><%= g.name %></a></li>
+    <div class='col-2 search-left'></div>
+    
+    <div class='col-8 search-results'>
+        <br>
+    <h1 class='results-header'>Galleries</h1>
+
+<% galleries.forEach(r =>{ %>
+    <div class= 'individual-results'>
+        <h4><a href="galleries/<%= r.id %>"><%=r.name%></a></h4>
+        <p><%= r.description %></p>
+        </div>
 <% }) %>
-</ul>
+
+
+</div>
+
+<div class='col-2 search-right'></div>
+
+
+</div>

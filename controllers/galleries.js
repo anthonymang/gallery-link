@@ -28,7 +28,9 @@ let transporter = mailer.createTransport({
 // Get routes
 
 router.get('/', isLoggedIn, async (req, res) =>{
-    const allGalleries = await db.gallery.findAll()
+    const allGalleries = await db.gallery.findAll({
+        order: [["name", "ASC"]]
+    })
     res.render('galleries/index', {galleries: allGalleries})
 })
 

@@ -13,6 +13,16 @@ cloudinary.config(clConfig)
 
 
 // get routes
+
+
+router.get('/', isLoggedIn, async (req, res) => {
+    const allWorks = await db.work.findAll({
+        order: [["title", "ASC"]]
+    })
+    res.render('works/index', {works: allWorks})
+})
+
+
 router.get('/create', isLoggedIn, async (req, res) => {
     res.render('works/create')
 })

@@ -15,7 +15,9 @@ cloudinary.config(clConfig)
 // get routes
 router.get('/', isLoggedIn, async (req, res) => {
     try{
-    const allArtists = await db.artist.findAll()
+    const allArtists = await db.artist.findAll({
+        order: [["first_name", "ASC"]]
+    })
     res.render('artists/index', {artists: allArtists})
     console.log(req.user)
     } catch(err) {
