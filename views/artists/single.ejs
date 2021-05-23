@@ -1,9 +1,28 @@
-<h1><%= artist.first_name %> <%= artist.last_name %></h1>
+<div class='row'>
 
-<ul>
+<div class = 'col-3 profile-info affix'>
+<img src="<%=artist.profileImage%>" alt="<%=artist.first_name%> <%=artist.first_name%>" class='profileImage'>
+<h5><%= artist.first_name %> <%= artist.last_name %></h5>
+<p>Bio:</p>
+<p><%=artist.bio%></p>
+<p>City: <%=artist.city%></p>
+<p>State: <%=artist.state%></p>
+<p>Email: <%=artist.email%></p>
+
+
+</div>
+
+
+<div class= 'col-9 offset-md-3 image-section'>
+
+<h1 class= 'single-header'>Artist Works</h1>
+
+<div class= 'works-favorites'>
 <% works.forEach(work =>{ %>
-    <li><%=work.title %>, <%= work.yearCreated %> </li>
-    <img src="<%= work.imageFile %>" alt="<%= work.description %>">
-    <div><%= work.description %></div>
+        <a href="/works/<%=work.id%>"><img src="<%= work.imageFile %>" alt="<%= work.description %>" class='work-image'>
+    <p><%=work.title %>, <%= work.yearCreated %> </p></a>
 <% }) %> 
-</ul>
+</div>
+
+</div>
+</div>
