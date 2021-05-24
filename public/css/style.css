@@ -254,3 +254,7 @@ color: white;
 #works-dropdown{
   z-index: 1;
 }
+
+.alert {
+  margin-top: 10vh;
+}

@@ -12,7 +12,6 @@ async function createArtist (){
         bio: 'Impressionist painter from the Cleveland area. I love everything impressionist, from Monet to, um, the others...',
         profilePic: 'https://i.imgur.com/8uJcFxW.jpg'
         })
-        console.log(newUser)
     }
     catch(err){
         console.log(err)
@@ -33,7 +32,6 @@ async function createWorkAddArtist (){
             description: 'Oil on canvas. A piece that invokes the duality of color - from black to white.',
             imageFile: 'https://i.pinimg.com/originals/60/eb/03/60eb0381bda448701bdd841a11e24845.jpg',
         })
-        console.log(newWork)
     } catch(err){
         console.log(err)
     }
@@ -49,7 +47,6 @@ async function findWorkWithArtistInfo(){
     },
     include: [db.user]
 });  
-    console.log(firstWork)
 }
 
 findWorkWithArtistInfo()

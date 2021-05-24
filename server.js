@@ -36,7 +36,6 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) =>{
-  console.log(res.locals)
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
   next();
@@ -69,8 +68,6 @@ app.get('/', isLoggedIn, async (req, res) => {
       id: Math.floor(Math.random() * galleryList.length)
     }
   })
-  console.log(featuredArtist)
-
 
   res.render('index', {featuredArtist: featuredArtist, featuredGallery: featuredGallery, featuredWork: featuredWork})
 });

@@ -19,7 +19,6 @@ router.get('/', isLoggedIn, async (req, res) => {
         order: [["first_name", "ASC"]]
     })
     res.render('artists/index', {artists: allArtists})
-    console.log(req.user)
     } catch(err) {
         console.log(err)
     }

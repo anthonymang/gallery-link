@@ -36,7 +36,6 @@ router.get('/', isLoggedIn, async (req, res) =>{
 
 
 router.get('/setup', isLoggedIn, async (req, res) => {
-    console.log(req.user)
     if (req.user.usertype != 'gallery' || req.user.setupComplete == 'true') {
         res.redirect('/')
     } else {
@@ -66,9 +65,7 @@ router.post('/favorite/:id', isLoggedIn, async (req,res)=>{
         include: [db.user]
     })
     thisGallery.addWork(thisWork)
-    console.log(thisWork)
     let emailRecipient = thisWork.user.dataValues.email
-    console.log(emailRecipient)
     let mailOptions = {
         from: 'anthonymang7370@gmail.com',
         to: emailRecipient,
@@ -110,7 +107,6 @@ router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) 
     async function upload(req) {
         try {
         let result = await streamUpload(req);
-        console.log(result);
         const thisGallery = await db.gallery.findOne({
             where: {userId: req.user.id}
         })
@@ -134,8 +130,6 @@ router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) 
         const updatedUser = await thisUser.update({
             setupComplete: req.body.setupComplete
         })
-        console.log(updatedGallery)
-        console.log(updatedUser)
         res.redirect(`/`)
         } catch (err){
         console.log(err)
