@@ -1,6 +1,7 @@
 # GalleryLink
 ## What is it?
 GalleryLink is a site for both artists and art galleries. Artists can create accounts to upload their work and galleries can sign up to search for works of art and artists for future shows.
+Access via https://gallerylink.herokuapp.com/.
 
 ## How does it work?
 GalleryLink is a Node.js Express application that uses Sequelize to connect to a Postgres SQL database. The following dependencies were used:
