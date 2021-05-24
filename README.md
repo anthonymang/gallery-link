@@ -162,6 +162,19 @@ router.delete('/delete', isLoggedIn, async (req, res)=> {
 
 ### Email Integration
 ``` js
+let transporter = mailer.createTransport({
+    service: 'gmail',
+    auth: {
+      type: 'OAuth2',
+      user: process.env.MAIL_USERNAME,
+      pass: process.env.MAIL_PASSWORD,
+      clientId: process.env.OAUTH_CLIENTID,
+      clientSecret: process.env.OAUTH_CLIENT_SECRET,
+      refreshToken: process.env.OAUTH_REFRESH_TOKEN
+    }
+  });
+
+
 router.post('/favorite/:id', isLoggedIn, async (req,res)=>{
     const thisGallery = await db.gallery.findOne({
         where: {userId: req.user.id}
@@ -227,3 +240,32 @@ router.get('/results', isLoggedIn, async (req,res)=>{
     res.render('search/results', {searchResults: results})
   })
   ```
+
+  ## Routing
+| Route      | Type       | Description   |
+| :---        |    :----:   |          ---: |
+| /           | GET         | Homepage, search and featured   |
+| /profile   | GET        | User's Profile      |
+| /auth/signup   | GET        | Show Signup Page      |
+| /auth/login   | GET        | Show Login Page      |
+| /auth/logout   | GET        | Logs out of account      |
+| /auth/login   | POST        | Login request      |
+| /auth/signup   | POST        | Create's account from signup page      |
+| /artists   | GET        | Show All Artists in Database      |
+| /artists/setup   | GET        | Artist Account Setup Page      |
+| /artists/:id   | GET        | Specific artist in database      |
+| /artists/setup   | PUT        | Edits artist info in database      |
+| /galleries   | GET        | All galleries in database      |
+| /galleries/setup   | GET        | Set up gallery account      |
+| /galleries/:id   | GET        | One Specific      |
+| /galleries/favorite/:id   | POST        | Gallery adding artwork to favorites      |
+| /galleries/setup   | PUT        |  Edits gallery info in database     |
+| /works   | GET        | All works in database      |
+| /works/create   | GET        | Create work page      |
+| /works/edit/:id   | GET        | Edit work page      |
+| /works/:id   | GET        | Specific work      |
+| /works/create   | POST        | Adding artwork to database      |
+| /works/edit/:idx   | PUT        | Edit work info      |
+| /works/remove   | DELETE        | Remove work from Gallery favorite list      |
+| /works/delete   | DELETE        | Delete work from Database      |
+| /search/results   | GET        | Find Search Results depending on user search      |
