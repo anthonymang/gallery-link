@@ -53,7 +53,38 @@ These processes will require a variety of environment variables, detailed throug
 We are using a Postgres SQL database. We have 4 tables (users, artists, works, galleries) and one join table (worksGalleries). Please refer to the ERD below for the full view of the tables.
 ![GalleryLink ERD](./final_ERD.png "GalleryLink ERD")
 
+  ## Routing
+| Route      | Type       | Description   |
+| :---        |    :----:   |          ---: |
+| /           | GET         | Homepage, search and featured   |
+| /profile   | GET        | User's Profile      |
+| /auth/signup   | GET        | Show Signup Page      |
+| /auth/login   | GET        | Show Login Page      |
+| /auth/logout   | GET        | Logs out of account      |
+| /auth/login   | POST        | Login request      |
+| /auth/signup   | POST        | Create's account from signup page      |
+| /artists   | GET        | Show All Artists in Database      |
+| /artists/setup   | GET        | Artist Account Setup Page      |
+| /artists/:id   | GET        | Specific artist in database      |
+| /artists/setup   | PUT        | Edits artist info in database      |
+| /galleries   | GET        | All galleries in database      |
+| /galleries/setup   | GET        | Set up gallery account      |
+| /galleries/:id   | GET        | One Specific      |
+| /galleries/favorite/:id   | POST        | Gallery adding artwork to favorites      |
+| /galleries/setup   | PUT        |  Edits gallery info in database     |
+| /works   | GET        | All works in database      |
+| /works/create   | GET        | Create work page      |
+| /works/edit/:id   | GET        | Edit work page      |
+| /works/:id   | GET        | Specific work      |
+| /works/create   | POST        | Adding artwork to database      |
+| /works/edit/:idx   | PUT        | Edit work info      |
+| /works/remove   | DELETE        | Remove work from Gallery favorite list      |
+| /works/delete   | DELETE        | Delete work from Database      |
+| /search/results   | GET        | Find Search Results depending on user search      |
+
+
 ## Code Snippets
+
 
 ### CRUD for Works
 Create (with Cloudinary Image Upload):
@@ -241,31 +272,3 @@ router.get('/results', isLoggedIn, async (req,res)=>{
   })
   ```
 
-  ## Routing
-| Route      | Type       | Description   |
-| :---        |    :----:   |          ---: |
-| /           | GET         | Homepage, search and featured   |
-| /profile   | GET        | User's Profile      |
-| /auth/signup   | GET        | Show Signup Page      |
-| /auth/login   | GET        | Show Login Page      |
-| /auth/logout   | GET        | Logs out of account      |
-| /auth/login   | POST        | Login request      |
-| /auth/signup   | POST        | Create's account from signup page      |
-| /artists   | GET        | Show All Artists in Database      |
-| /artists/setup   | GET        | Artist Account Setup Page      |
-| /artists/:id   | GET        | Specific artist in database      |
-| /artists/setup   | PUT        | Edits artist info in database      |
-| /galleries   | GET        | All galleries in database      |
-| /galleries/setup   | GET        | Set up gallery account      |
-| /galleries/:id   | GET        | One Specific      |
-| /galleries/favorite/:id   | POST        | Gallery adding artwork to favorites      |
-| /galleries/setup   | PUT        |  Edits gallery info in database     |
-| /works   | GET        | All works in database      |
-| /works/create   | GET        | Create work page      |
-| /works/edit/:id   | GET        | Edit work page      |
-| /works/:id   | GET        | Specific work      |
-| /works/create   | POST        | Adding artwork to database      |
-| /works/edit/:idx   | PUT        | Edit work info      |
-| /works/remove   | DELETE        | Remove work from Gallery favorite list      |
-| /works/delete   | DELETE        | Delete work from Database      |
-| /search/results   | GET        | Find Search Results depending on user search      |
