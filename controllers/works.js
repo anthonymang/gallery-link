@@ -75,7 +75,6 @@ router.post('/create', isLoggedIn, upload.single('imageUpload'), async (req, res
     async function upload(req) {
         try {
         let result = await streamUpload(req);
-        console.log(result);
         const thisArtist = await db.artist.findOne({
             where: {userId: req.user.id}
         })
@@ -93,7 +92,6 @@ router.post('/create', isLoggedIn, upload.single('imageUpload'), async (req, res
 
         const addedWork = await thisUser.addWork(newWork)
 
-        console.log(newWork)
         res.redirect(`/artists/${thisArtist.id}`)
         } catch (err){
         console.log(err)
@@ -117,7 +115,6 @@ router.put('/edit/:idx', isLoggedIn, async (req, res)=>{
             description: req.body.description,
             discipline: req.body.discipline,
         })
-        console.log(updatedWork)
         res.redirect(`/works/${req.params.idx}`)
     } catch (error) {
         console.log(error)
@@ -149,7 +146,6 @@ router.delete('/delete', isLoggedIn, async (req, res)=> {
         const deleted = await db.work.destroy({
             where:{ id: req.body.id }
         })
-        console.log(deleted)
         res.redirect('/profile')
     } catch (error) {
         console.log(error)   

@@ -26,7 +26,6 @@ router.get('/', isLoggedIn, async (req, res) => {
 })
 
 router.get('/setup', isLoggedIn, async (req, res) => {
-    console.log(req.user)
     if (req.user.usertype != 'artist' || req.user.setupComplete == 'true') {
         res.redirect('/')
     } else {
@@ -70,7 +69,6 @@ router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) 
                 }
               }
             );
-            console.log(req.file)
             // makes req.file.buffer readable??
            streamifier.createReadStream(req.file.buffer).pipe(stream);
         });
@@ -79,7 +77,6 @@ router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) 
     async function upload(req) {
         try {
         let result = await streamUpload(req);
-        console.log(result);
         const thisArtist = await db.artist.findOne({
             where: {userId: req.user.id}
         })
@@ -101,9 +98,6 @@ router.put('/setup', isLoggedIn, upload.single('imageUpload'), async (req, res) 
         const updatedUser = await thisUser.update({
             setupComplete: req.body.setupComplete
         })
-        console.log(updatedArtist)
-        console.log(updatedUser)
-        console.log(req.user)
         res.redirect(`/`)
         } catch (err){
         console.log(err)

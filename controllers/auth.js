@@ -35,10 +35,7 @@ router.post('/signup', async (req,res)=>{
       defaults: { password, usertype }
     });
     if (created) {
-        console.log(user)
-        console.log(`----- ${user.email} was created -----`);
         let successObject = {};
-        console.log(user.usertype)
         if (user.usertype == 'artist'){
 
           const newArtist = await db.artist.create({

@@ -9,7 +9,6 @@ const { Op } = require("sequelize");
 
   
 router.get('/results', isLoggedIn, async (req,res)=>{
-    console.log(req.query)
     let results = []
     let target = req.query.target
     if (req.query.search == 'gallery'){
@@ -43,7 +42,6 @@ router.get('/results', isLoggedIn, async (req,res)=>{
             })
         }
     }
-        console.log(results)
     res.render('search/results', {searchResults: results})
   })
 
