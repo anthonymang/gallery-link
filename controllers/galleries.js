@@ -68,6 +68,7 @@ router.post('/favorite/:id', isLoggedIn, async (req,res)=>{
     thisGallery.addWork(thisWork)
     console.log(thisWork)
     let emailRecipient = thisWork.user.dataValues.email
+    console.log(emailRecipient)
     let mailOptions = {
         from: 'anthonymang7370@gmail.com',
         to: emailRecipient,
