@@ -13,8 +13,6 @@ cloudinary.config(clConfig)
 
 
 // get routes
-
-
 router.get('/', isLoggedIn, async (req, res) => {
     const allWorks = await db.work.findAll({
         order: [["title", "ASC"]]
@@ -121,8 +119,6 @@ router.put('/edit/:idx', isLoggedIn, async (req, res)=>{
 }})
 
 // delete route
-
-
 router.delete('/remove', isLoggedIn, async (req,res)=>{
     const thisGallery = await db.gallery.findOne({
         where: {
